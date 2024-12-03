@@ -1,0 +1,3000 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shuning Wang">
+<meta name="author" content="April Luo">
+<meta name="author" content="Chang Lu">
+<meta name="dcterms.date" content="2024-12-02">
+
+<title>hw8</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="hw8_files/libs/clipboard/clipboard.min.js"></script>
+<script src="hw8_files/libs/quarto-html/quarto.js"></script>
+<script src="hw8_files/libs/quarto-html/popper.min.js"></script>
+<script src="hw8_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="hw8_files/libs/quarto-html/anchor.min.js"></script>
+<link href="hw8_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="hw8_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="hw8_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="hw8_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="hw8_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">hw8</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shuning Wang </p>
+             <p>April Luo </p>
+             <p>Chang Lu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 2, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="research-question" class="level1">
+<h1>Research Question</h1>
+<blockquote class="blockquote">
+<p>Do effort preferences on rewarded trials in the training section differ between the effort and performance conditions? (model1) Do effort preferences on rewarded trials in the training section differ between the effort and neutral conditions? (model2) Do effort preferences on probe (unrewarded) trials in the training section differ between the effort and performance conditions? (model3) Do effort preferences on probe (unrewarded) trials in the training section differ between the effort and neutral conditons? (model4) Do effort preferences on the dot-motion task in the post-training section differ between the effort and performance conditions? (model5) Do effort preferences on the dot-motion task in the post-training section differ between the effort and neutral conditions? (model6) Do effort preferences on the math task in the post-training section differ between the effort and performance conditions? (model7) Do effort preferences on the math task in the post-training section differ between the effort and neutral conditions? (model8)</p>
+</blockquote>
+<p>#Summary of the study design:</p>
+<p>The entire study is divided into three sections: the pre-training section, the training section, and the post-training section. The pre-training section includes two types of cognitive tasks: the dot motion task and the math task. This section is designed to establish a baseline for participants regarding their effort expenditure. The training section is further divided into reward trials and probe trials (unrewarded), with three conditions: reward, performance, and neutral. It employs a between-subjects design to manipulate participants’ effort preferences based on the different conditions, but it includes only one cognitive task, which is the dot motion task. In the post-training section, two cognitive tasks are included: the dot motion task and the math task. The dot motion task aims to demonstrate that the manipulation in the training section has a lasting effect over time. Meanwhile, the math task is designed to show that this training not only has a sustained effect on the same task but also exerts an influence across different tasks.</p>
+</section>
+<section id="variables-in-dtdotavgwide-dotmotion-task-dataset" class="level1">
+<h1>Variables in dtdotavgwide (dotmotion task dataset)</h1>
+<ul>
+<li><code>condition</code>: performance(The higher the accuracy of the task, the greater the reward), effort(Choosing the hard task yields a high reward, while choosing the easy task results in a low reward), neutral(The reward is a fixed value.).</li>
+<li><code>reward</code>: The proportion of participants choosing the hard difficulty task in the reward trials during the training section (N_reward = 40 for each subject).</li>
+<li><code>Y_reward</code>: The number of trials in which participants chose the hard difficulty task during the reward trials in the training section (Y_reward =reward * N_reward).</li>
+<li><code>probe</code>: The proportion of participants choosing the hard difficulty task in the unreward trials during the training section (N_probe = 20 for each subject).</li>
+<li><code>Y_probe</code>: The number of trials in which participants chose the hard difficulty task during the unreward trials in the training section (Y_reward = probe * N_probe).</li>
+<li><code>pre_training</code>: The proportion of participants choosing the hard difficulty task in the trials of the pre-training section (N_pretraining = 40).</li>
+<li><code>Y_pretraining</code>: The number of trials in which participants chose the hard difficulty task during the trials in the pre-training section (Y_pretraining = pre_training * N_pretraining).</li>
+<li><code>post_training</code>: The proportion of participants choosing the hard difficulty task in the trials of the post_training section (N_posttraining = 20).</li>
+<li><code>Y_posttraining</code>: The number of trials in which participants chose the hard difficulty task during the trials in the post-training section (Y_posttraining = post_training * N_posttraining).</li>
+</ul>
+</section>
+<section id="variables-in-dtmathavgwide-math-task-dataset" class="level1">
+<h1>Variables in dtmathavgwide (math task dataset)</h1>
+<p>The math task will not appear in the training section (reward trials + probe trials), so the math task dataset does not include any probe or reward trials. - <code>condition</code>: Same as above. - <code>pre_training</code>: Same as above. - <code>Y_pretraining</code>: Same as above. - <code>post_training</code>: Same as above. - <code>Y_posttraining</code>: Same as above.</p>
+<section id="data-import" class="level2">
+<h2 class="anchored" data-anchor-id="data-import">Data Import</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dtdotavgwide <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">"/Users/wangshuning/Desktop/USC/24Fall/573Bayesian/project/osfstorage-archive/data/clean/dot_wide.csv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dtmathavgwide <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">"/Users/wangshuning/Desktop/USC/24Fall/573Bayesian/project/osfstorage-archive/data/clean/math_wide.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>dtdotavgwide[, condition <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"performance"</span>, <span class="st">"neutral"</span>, <span class="st">"effort"</span>))]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dtmathavgwide[, condition <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"performance"</span>, <span class="st">"neutral"</span>, <span class="st">"effort"</span>))]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>e_vs_p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"effort"</span>, <span class="st">"performance"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>e_vs_n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"effort"</span>, <span class="st">"neutral"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>n_vs_p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"neutral"</span>, <span class="st">"performance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="variable-summary" class="level2">
+<h2 class="anchored" data-anchor-id="variable-summary">Variable Summary</h2>
+<p>Table <a href="#tbl-summ-var1" class="quarto-xref">Table&nbsp;1</a> displays the summary statistics of effort preferences for the dot motion task in the pre-training(baseline) section by condition.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary</span>(Y_pretraining  <span class="sc">*</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                (N <span class="sc">+</span> Mean <span class="sc">+</span> SD <span class="sc">+</span> Min <span class="sc">+</span> Max <span class="sc">+</span> Histogram) <span class="sc">~</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">factor</span>(condition, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"performance"</span>, <span class="st">"neutral"</span>, <span class="st">"effort"</span>)),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> dtdotavgwide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-var1" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-var1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Descriptive statistics by condition for effort preferences for the dot motion task in the pre-training section
+</figcaption>
+<div aria-describedby="tbl-summ-var1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_hav2gv6cguapko30iqda(i, j, css_id) {
+          var table = document.getElementById("tinytable_hav2gv6cguapko30iqda");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_hav2gv6cguapko30iqda');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_hav2gv6cguapko30iqda(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_hav2gv6cguapko30iqda");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 0, j: 2 }, { i: 0, j: 4 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_w7z1aokwumbvfmmexvj0',}, 
+          { positions: [ { i: 6, j: 0 }, { i: 6, j: 1 },  ], css_id: 'tinytable_css_n9el9tsie2hgs922pwg5',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 0 }, { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 },  ], css_id: 'tinytable_css_jentuqoyexfmty1ryr0o',}, 
+          { positions: [ { i: 6, j: 3 }, { i: 6, j: 2 }, { i: 6, j: 4 },  ], css_id: 'tinytable_css_jam571encelnbmn2aj5q',}, 
+          { positions: [ { i: 1, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 3 }, { i: 2, j: 3 }, { i: 3, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 }, { i: 3, j: 4 }, { i: 4, j: 4 }, { i: 1, j: 4 }, { i: 2, j: 4 }, { i: 5, j: 4 },  ], css_id: 'tinytable_css_49v8k2jzi7uoat1i43be',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_0mzkob5s31j2zmkszdqv',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_hav2gv6cguapko30iqda(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_w7z1aokwumbvfmmexvj0, .table th.tinytable_css_w7z1aokwumbvfmmexvj0 { text-align: right; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_n9el9tsie2hgs922pwg5, .table th.tinytable_css_n9el9tsie2hgs922pwg5 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_jentuqoyexfmty1ryr0o, .table th.tinytable_css_jentuqoyexfmty1ryr0o { text-align: left; }
+      .table td.tinytable_css_jam571encelnbmn2aj5q, .table th.tinytable_css_jam571encelnbmn2aj5q { text-align: right; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_49v8k2jzi7uoat1i43be, .table th.tinytable_css_49v8k2jzi7uoat1i43be { text-align: right; }
+      .table td.tinytable_css_0mzkob5s31j2zmkszdqv, .table th.tinytable_css_0mzkob5s31j2zmkszdqv { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_hav2gv6cguapko30iqda" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">  </th>
+                <th scope="col">performance</th>
+                <th scope="col">neutral</th>
+                <th scope="col">effort</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td>Y_pretraining</td>
+                  <td>N        </td>
+                  <td>255     </td>
+                  <td>252    </td>
+                  <td>254       </td>
+                </tr>
+                <tr>
+                  <td>             </td>
+                  <td>Mean     </td>
+                  <td>14.04   </td>
+                  <td>13.99  </td>
+                  <td>14.37     </td>
+                </tr>
+                <tr>
+                  <td>             </td>
+                  <td>SD       </td>
+                  <td>10.20   </td>
+                  <td>9.76   </td>
+                  <td>10.87     </td>
+                </tr>
+                <tr>
+                  <td>             </td>
+                  <td>Min      </td>
+                  <td>0.00    </td>
+                  <td>0.00   </td>
+                  <td>0.00      </td>
+                </tr>
+                <tr>
+                  <td>             </td>
+                  <td>Max      </td>
+                  <td>40.00   </td>
+                  <td>40.00  </td>
+                  <td>40.00     </td>
+                </tr>
+                <tr>
+                  <td>             </td>
+                  <td>Histogram</td>
+                  <td>▇▁▁▂▆▄▁▁</td>
+                  <td>▇▂▁▃▅▆▁</td>
+                  <td>▇▁▁▁▄▆▁  ▁</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Table <a href="#tbl-summ-var2" class="quarto-xref">Table&nbsp;2</a> displays the summary statistics of effort preferences for the dot motion task during the rewarded trials in the training section, categorized by condition.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary</span>(Y_reward  <span class="sc">*</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                (N <span class="sc">+</span> Mean <span class="sc">+</span> SD <span class="sc">+</span> Min <span class="sc">+</span> Max <span class="sc">+</span> Histogram) <span class="sc">~</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">factor</span>(condition, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"performance"</span>, <span class="st">"neutral"</span>, <span class="st">"effort"</span>)),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> dtdotavgwide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-var2" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-var2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Descriptive statistics by condition for effort preferences on rewarded trials in the training section for the dot motion task
+</figcaption>
+<div aria-describedby="tbl-summ-var2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_ripa6wkrmoopfa1c58lf(i, j, css_id) {
+          var table = document.getElementById("tinytable_ripa6wkrmoopfa1c58lf");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_ripa6wkrmoopfa1c58lf');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_ripa6wkrmoopfa1c58lf(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_ripa6wkrmoopfa1c58lf");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 0, j: 2 }, { i: 0, j: 4 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_vyh99n2tqlpclfy5gsjv',}, 
+          { positions: [ { i: 6, j: 3 }, { i: 6, j: 2 }, { i: 6, j: 4 },  ], css_id: 'tinytable_css_spyqth0fy1x3t4jfyyle',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 0 }, { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 },  ], css_id: 'tinytable_css_etmf6vm8qtd0uootsm3n',}, 
+          { positions: [ { i: 1, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 3 }, { i: 2, j: 3 }, { i: 3, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 }, { i: 3, j: 4 }, { i: 4, j: 4 }, { i: 1, j: 4 }, { i: 2, j: 4 }, { i: 5, j: 4 },  ], css_id: 'tinytable_css_6o9du54qhlgl5nslr7v6',}, 
+          { positions: [ { i: 6, j: 0 }, { i: 6, j: 1 },  ], css_id: 'tinytable_css_52jdiyk7qhmc8qh74fm7',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_2f4mvkr01vkwvk35737a',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_ripa6wkrmoopfa1c58lf(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_vyh99n2tqlpclfy5gsjv, .table th.tinytable_css_vyh99n2tqlpclfy5gsjv { text-align: right; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_spyqth0fy1x3t4jfyyle, .table th.tinytable_css_spyqth0fy1x3t4jfyyle { text-align: right; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_etmf6vm8qtd0uootsm3n, .table th.tinytable_css_etmf6vm8qtd0uootsm3n { text-align: left; }
+      .table td.tinytable_css_6o9du54qhlgl5nslr7v6, .table th.tinytable_css_6o9du54qhlgl5nslr7v6 { text-align: right; }
+      .table td.tinytable_css_52jdiyk7qhmc8qh74fm7, .table th.tinytable_css_52jdiyk7qhmc8qh74fm7 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_2f4mvkr01vkwvk35737a, .table th.tinytable_css_2f4mvkr01vkwvk35737a { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_ripa6wkrmoopfa1c58lf" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">  </th>
+                <th scope="col">performance</th>
+                <th scope="col">neutral</th>
+                <th scope="col">effort</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td>Y_reward</td>
+                  <td>N        </td>
+                  <td>255   </td>
+                  <td>252       </td>
+                  <td>254       </td>
+                </tr>
+                <tr>
+                  <td>        </td>
+                  <td>Mean     </td>
+                  <td>9.89  </td>
+                  <td>12.87     </td>
+                  <td>23.55     </td>
+                </tr>
+                <tr>
+                  <td>        </td>
+                  <td>SD       </td>
+                  <td>9.85  </td>
+                  <td>10.37     </td>
+                  <td>14.72     </td>
+                </tr>
+                <tr>
+                  <td>        </td>
+                  <td>Min      </td>
+                  <td>0.00  </td>
+                  <td>0.00      </td>
+                  <td>0.00      </td>
+                </tr>
+                <tr>
+                  <td>        </td>
+                  <td>Max      </td>
+                  <td>40.00 </td>
+                  <td>40.00     </td>
+                  <td>40.00     </td>
+                </tr>
+                <tr>
+                  <td>        </td>
+                  <td>Histogram</td>
+                  <td>▇▃▂▁▂▁</td>
+                  <td>▇▃▁▂▃▃▁▁ ▁</td>
+                  <td>▆ ▁▁▁▁▂▂▇▆</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Table <a href="#tbl-summ-var3" class="quarto-xref">Table&nbsp;3</a> displays the summary statistics of effort preferences for the dot motion task during the unrewarded trials (probe trials) in the training section, categorized by condition.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary</span>(Y_probe  <span class="sc">*</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                (N <span class="sc">+</span> Mean <span class="sc">+</span> SD <span class="sc">+</span> Min <span class="sc">+</span> Max <span class="sc">+</span> Histogram) <span class="sc">~</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">factor</span>(condition, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"performance"</span>, <span class="st">"neutral"</span>, <span class="st">"effort"</span>)),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> dtdotavgwide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-var3" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-var3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Descriptive statistics by condition for effort preferences on unrewarded trials (probe trials) in the training section for the dot motion task
+</figcaption>
+<div aria-describedby="tbl-summ-var3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_x2proz02sw9r8yvsixxo(i, j, css_id) {
+          var table = document.getElementById("tinytable_x2proz02sw9r8yvsixxo");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_x2proz02sw9r8yvsixxo');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_x2proz02sw9r8yvsixxo(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_x2proz02sw9r8yvsixxo");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 1, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 3 }, { i: 2, j: 3 }, { i: 3, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 }, { i: 3, j: 4 }, { i: 4, j: 4 }, { i: 1, j: 4 }, { i: 2, j: 4 }, { i: 5, j: 4 },  ], css_id: 'tinytable_css_yuefrrgvpfv67fpqewvy',}, 
+          { positions: [ { i: 6, j: 3 }, { i: 6, j: 2 }, { i: 6, j: 4 },  ], css_id: 'tinytable_css_r5u4df4gl7py91s8ofi5',}, 
+          { positions: [ { i: 0, j: 2 }, { i: 0, j: 4 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_la924tzhtba3aa6pcoze',}, 
+          { positions: [ { i: 6, j: 0 }, { i: 6, j: 1 },  ], css_id: 'tinytable_css_i4xo80oh6wpe6shd0dti',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_cfwkt7s1bpod13cn3c6n',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 0 }, { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 },  ], css_id: 'tinytable_css_5lxl6mbxtzv0hcsbb4u8',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_x2proz02sw9r8yvsixxo(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_yuefrrgvpfv67fpqewvy, .table th.tinytable_css_yuefrrgvpfv67fpqewvy { text-align: right; }
+      .table td.tinytable_css_r5u4df4gl7py91s8ofi5, .table th.tinytable_css_r5u4df4gl7py91s8ofi5 { text-align: right; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_la924tzhtba3aa6pcoze, .table th.tinytable_css_la924tzhtba3aa6pcoze { text-align: right; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_i4xo80oh6wpe6shd0dti, .table th.tinytable_css_i4xo80oh6wpe6shd0dti { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_cfwkt7s1bpod13cn3c6n, .table th.tinytable_css_cfwkt7s1bpod13cn3c6n { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_5lxl6mbxtzv0hcsbb4u8, .table th.tinytable_css_5lxl6mbxtzv0hcsbb4u8 { text-align: left; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_x2proz02sw9r8yvsixxo" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">  </th>
+                <th scope="col">performance</th>
+                <th scope="col">neutral</th>
+                <th scope="col">effort</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td>Y_probe</td>
+                  <td>N        </td>
+                  <td>255       </td>
+                  <td>252       </td>
+                  <td>254       </td>
+                </tr>
+                <tr>
+                  <td>       </td>
+                  <td>Mean     </td>
+                  <td>7.60      </td>
+                  <td>7.53      </td>
+                  <td>8.57      </td>
+                </tr>
+                <tr>
+                  <td>       </td>
+                  <td>SD       </td>
+                  <td>5.55      </td>
+                  <td>4.93      </td>
+                  <td>6.35      </td>
+                </tr>
+                <tr>
+                  <td>       </td>
+                  <td>Min      </td>
+                  <td>0.00      </td>
+                  <td>0.00      </td>
+                  <td>0.00      </td>
+                </tr>
+                <tr>
+                  <td>       </td>
+                  <td>Max      </td>
+                  <td>20.00     </td>
+                  <td>20.00     </td>
+                  <td>20.00     </td>
+                </tr>
+                <tr>
+                  <td>       </td>
+                  <td>Histogram</td>
+                  <td>▇▃▄▃▄▂▃▁▂▁</td>
+                  <td>▇▄▄▆▅▄▃▁▁▁</td>
+                  <td>▇▃▂▃▃▃▂▁▂▂</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Table <a href="#tbl-summ-var4" class="quarto-xref">Table&nbsp;4</a> displays the summary statistics of effort preferences for the dot motion task in the post-training section by condition.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary</span>(Y_posttraining  <span class="sc">*</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                (N <span class="sc">+</span> Mean <span class="sc">+</span> SD <span class="sc">+</span> Min <span class="sc">+</span> Max <span class="sc">+</span> Histogram) <span class="sc">~</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">factor</span>(condition, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"performance"</span>, <span class="st">"neutral"</span>, <span class="st">"effort"</span>)),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> dtdotavgwide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-var4" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-var4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Descriptive statistics by condition for effort preferences for the dot motion task in the post-training section
+</figcaption>
+<div aria-describedby="tbl-summ-var4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_xhhhysvy2kuxxw6xlh90(i, j, css_id) {
+          var table = document.getElementById("tinytable_xhhhysvy2kuxxw6xlh90");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_xhhhysvy2kuxxw6xlh90');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_xhhhysvy2kuxxw6xlh90(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_xhhhysvy2kuxxw6xlh90");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_v4n3gyvfpq64jcr97bj9',}, 
+          { positions: [ { i: 1, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 3 }, { i: 2, j: 3 }, { i: 3, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 }, { i: 3, j: 4 }, { i: 4, j: 4 }, { i: 1, j: 4 }, { i: 2, j: 4 }, { i: 5, j: 4 },  ], css_id: 'tinytable_css_o7w16zpsql15die2ytrs',}, 
+          { positions: [ { i: 6, j: 3 }, { i: 6, j: 2 }, { i: 6, j: 4 },  ], css_id: 'tinytable_css_ne9z4v9fzhfldf7lkog3',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 0 }, { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 },  ], css_id: 'tinytable_css_fmltqq5tsct3zl1tvm1c',}, 
+          { positions: [ { i: 0, j: 2 }, { i: 0, j: 4 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_ajxtadcrl7073ensr8vc',}, 
+          { positions: [ { i: 6, j: 0 }, { i: 6, j: 1 },  ], css_id: 'tinytable_css_934m3djsodzssqlvcnjl',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_xhhhysvy2kuxxw6xlh90(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_v4n3gyvfpq64jcr97bj9, .table th.tinytable_css_v4n3gyvfpq64jcr97bj9 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_o7w16zpsql15die2ytrs, .table th.tinytable_css_o7w16zpsql15die2ytrs { text-align: right; }
+      .table td.tinytable_css_ne9z4v9fzhfldf7lkog3, .table th.tinytable_css_ne9z4v9fzhfldf7lkog3 { text-align: right; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_fmltqq5tsct3zl1tvm1c, .table th.tinytable_css_fmltqq5tsct3zl1tvm1c { text-align: left; }
+      .table td.tinytable_css_ajxtadcrl7073ensr8vc, .table th.tinytable_css_ajxtadcrl7073ensr8vc { text-align: right; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_934m3djsodzssqlvcnjl, .table th.tinytable_css_934m3djsodzssqlvcnjl { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_xhhhysvy2kuxxw6xlh90" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">  </th>
+                <th scope="col">performance</th>
+                <th scope="col">neutral</th>
+                <th scope="col">effort</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td>Y_posttraining</td>
+                  <td>N        </td>
+                  <td>255    </td>
+                  <td>252    </td>
+                  <td>254       </td>
+                </tr>
+                <tr>
+                  <td>              </td>
+                  <td>Mean     </td>
+                  <td>5.32   </td>
+                  <td>6.07   </td>
+                  <td>7.09      </td>
+                </tr>
+                <tr>
+                  <td>              </td>
+                  <td>SD       </td>
+                  <td>5.39   </td>
+                  <td>5.40   </td>
+                  <td>6.51      </td>
+                </tr>
+                <tr>
+                  <td>              </td>
+                  <td>Min      </td>
+                  <td>0.00   </td>
+                  <td>0.00   </td>
+                  <td>0.00      </td>
+                </tr>
+                <tr>
+                  <td>              </td>
+                  <td>Max      </td>
+                  <td>20.00  </td>
+                  <td>20.00  </td>
+                  <td>20.00     </td>
+                </tr>
+                <tr>
+                  <td>              </td>
+                  <td>Histogram</td>
+                  <td>▇▂▁▁▂▂▁</td>
+                  <td>▇▁▁▁▄▁▁</td>
+                  <td>▇ ▁▁▃▂▁▁ ▁</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Table <a href="#tbl-summ-var5" class="quarto-xref">Table&nbsp;5</a> displays the summary statistics of effort preferences for the math task in the pre-training section by condition.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary</span>(Y_pretraining  <span class="sc">*</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                (N <span class="sc">+</span> Mean <span class="sc">+</span> SD <span class="sc">+</span> Min <span class="sc">+</span> Max <span class="sc">+</span> Histogram) <span class="sc">~</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">factor</span>(condition, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"performance"</span>, <span class="st">"neutral"</span>, <span class="st">"effort"</span>)),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> dtmathavgwide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-var5" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-var5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Descriptive statistics by condition for effort preferences for the math task in the pre-training section
+</figcaption>
+<div aria-describedby="tbl-summ-var5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_e6krxccxexcjhl2oec58(i, j, css_id) {
+          var table = document.getElementById("tinytable_e6krxccxexcjhl2oec58");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_e6krxccxexcjhl2oec58');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_e6krxccxexcjhl2oec58(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_e6krxccxexcjhl2oec58");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 1, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 3 }, { i: 2, j: 3 }, { i: 3, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 }, { i: 3, j: 4 }, { i: 4, j: 4 }, { i: 1, j: 4 }, { i: 2, j: 4 }, { i: 5, j: 4 },  ], css_id: 'tinytable_css_zam4bbg2r37zehkpq9oa',}, 
+          { positions: [ { i: 6, j: 0 }, { i: 6, j: 1 },  ], css_id: 'tinytable_css_o5ekucog6tz8w9w8j94w',}, 
+          { positions: [ { i: 6, j: 3 }, { i: 6, j: 2 }, { i: 6, j: 4 },  ], css_id: 'tinytable_css_h75b9bfhnrnladqxx02t',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 0 }, { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 },  ], css_id: 'tinytable_css_d6ull24ks3jr0z4wgpqf',}, 
+          { positions: [ { i: 0, j: 2 }, { i: 0, j: 4 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_93qvoc3jo3h051sfbmjg',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_7sro9u1nn7xt4nikah8b',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_e6krxccxexcjhl2oec58(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_zam4bbg2r37zehkpq9oa, .table th.tinytable_css_zam4bbg2r37zehkpq9oa { text-align: right; }
+      .table td.tinytable_css_o5ekucog6tz8w9w8j94w, .table th.tinytable_css_o5ekucog6tz8w9w8j94w { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_h75b9bfhnrnladqxx02t, .table th.tinytable_css_h75b9bfhnrnladqxx02t { text-align: right; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_d6ull24ks3jr0z4wgpqf, .table th.tinytable_css_d6ull24ks3jr0z4wgpqf { text-align: left; }
+      .table td.tinytable_css_93qvoc3jo3h051sfbmjg, .table th.tinytable_css_93qvoc3jo3h051sfbmjg { text-align: right; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_7sro9u1nn7xt4nikah8b, .table th.tinytable_css_7sro9u1nn7xt4nikah8b { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_e6krxccxexcjhl2oec58" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">  </th>
+                <th scope="col">performance</th>
+                <th scope="col">neutral</th>
+                <th scope="col">effort</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td>Y_pretraining</td>
+                  <td>N        </td>
+                  <td>255       </td>
+                  <td>252      </td>
+                  <td>254       </td>
+                </tr>
+                <tr>
+                  <td>             </td>
+                  <td>Mean     </td>
+                  <td>15.32     </td>
+                  <td>16.75    </td>
+                  <td>15.60     </td>
+                </tr>
+                <tr>
+                  <td>             </td>
+                  <td>SD       </td>
+                  <td>10.12     </td>
+                  <td>9.88     </td>
+                  <td>10.78     </td>
+                </tr>
+                <tr>
+                  <td>             </td>
+                  <td>Min      </td>
+                  <td>0.00      </td>
+                  <td>0.00     </td>
+                  <td>0.00      </td>
+                </tr>
+                <tr>
+                  <td>             </td>
+                  <td>Max      </td>
+                  <td>40.00     </td>
+                  <td>40.00    </td>
+                  <td>36.00     </td>
+                </tr>
+                <tr>
+                  <td>             </td>
+                  <td>Histogram</td>
+                  <td>▇▂▂▄▆▅▃▁▁▁</td>
+                  <td>▆▂▃▄▇▇▄▂▁</td>
+                  <td>▇▁▁▂▂▄▄▂▂▁</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Table <a href="#tbl-summ-var6" class="quarto-xref">Table&nbsp;6</a> displays the summary statistics of effort preferences for the math task in the post-training section by condition.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary</span>(Y_posttraining  <span class="sc">*</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                (N <span class="sc">+</span> Mean <span class="sc">+</span> SD <span class="sc">+</span> Min <span class="sc">+</span> Max <span class="sc">+</span> Histogram) <span class="sc">~</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">factor</span>(condition, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"performance"</span>, <span class="st">"neutral"</span>, <span class="st">"effort"</span>)),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> dtmathavgwide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-var6" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-var6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6: Descriptive statistics by condition for effort preferences for the math task in the post-training section
+</figcaption>
+<div aria-describedby="tbl-summ-var6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_rbwpoz1e6boowo9ovkg2(i, j, css_id) {
+          var table = document.getElementById("tinytable_rbwpoz1e6boowo9ovkg2");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_rbwpoz1e6boowo9ovkg2');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_rbwpoz1e6boowo9ovkg2(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_rbwpoz1e6boowo9ovkg2");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 6, j: 0 }, { i: 6, j: 1 },  ], css_id: 'tinytable_css_zrm0hmbxn7jsviq5s6so',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 0 }, { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 },  ], css_id: 'tinytable_css_g8jyozxl3ux4wp8p7rz8',}, 
+          { positions: [ { i: 0, j: 2 }, { i: 0, j: 4 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_bp5qt00kbmghp6o8ykud',}, 
+          { positions: [ { i: 6, j: 3 }, { i: 6, j: 2 }, { i: 6, j: 4 },  ], css_id: 'tinytable_css_aq1z5wiev66oxcheifvp',}, 
+          { positions: [ { i: 1, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 3 }, { i: 2, j: 3 }, { i: 3, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 }, { i: 3, j: 4 }, { i: 4, j: 4 }, { i: 1, j: 4 }, { i: 2, j: 4 }, { i: 5, j: 4 },  ], css_id: 'tinytable_css_4xbo7yidl92w9btcfw7h',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_2snjlveomual4t2nbzd4',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_rbwpoz1e6boowo9ovkg2(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_zrm0hmbxn7jsviq5s6so, .table th.tinytable_css_zrm0hmbxn7jsviq5s6so { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_g8jyozxl3ux4wp8p7rz8, .table th.tinytable_css_g8jyozxl3ux4wp8p7rz8 { text-align: left; }
+      .table td.tinytable_css_bp5qt00kbmghp6o8ykud, .table th.tinytable_css_bp5qt00kbmghp6o8ykud { text-align: right; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_aq1z5wiev66oxcheifvp, .table th.tinytable_css_aq1z5wiev66oxcheifvp { text-align: right; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_4xbo7yidl92w9btcfw7h, .table th.tinytable_css_4xbo7yidl92w9btcfw7h { text-align: right; }
+      .table td.tinytable_css_2snjlveomual4t2nbzd4, .table th.tinytable_css_2snjlveomual4t2nbzd4 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_rbwpoz1e6boowo9ovkg2" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">  </th>
+                <th scope="col">performance</th>
+                <th scope="col">neutral</th>
+                <th scope="col">effort</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td>Y_posttraining</td>
+                  <td>N        </td>
+                  <td>255     </td>
+                  <td>252     </td>
+                  <td>254       </td>
+                </tr>
+                <tr>
+                  <td>              </td>
+                  <td>Mean     </td>
+                  <td>6.05    </td>
+                  <td>6.81    </td>
+                  <td>7.13      </td>
+                </tr>
+                <tr>
+                  <td>              </td>
+                  <td>SD       </td>
+                  <td>5.40    </td>
+                  <td>5.38    </td>
+                  <td>6.07      </td>
+                </tr>
+                <tr>
+                  <td>              </td>
+                  <td>Min      </td>
+                  <td>0.00    </td>
+                  <td>0.00    </td>
+                  <td>0.00      </td>
+                </tr>
+                <tr>
+                  <td>              </td>
+                  <td>Max      </td>
+                  <td>20.00   </td>
+                  <td>20.00   </td>
+                  <td>20.00     </td>
+                </tr>
+                <tr>
+                  <td>              </td>
+                  <td>Histogram</td>
+                  <td>▇▁▁▂▃▂▁▁</td>
+                  <td>▇▂▂▂▄▄▁▁</td>
+                  <td>▇▁▁▁▄▂▁▁▁▁</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="model" class="level1">
+<h1>Model</h1>
+<ol type="1">
+<li><span class="math display">\[
+\begin{aligned}
+{Y}_i &amp;\sim \text{Bin}(Nreward_i, \mu_i) \\
+logit(\mu_i) &amp;= \eta_i \\
+\eta_j &amp;= \beta_0 + \beta_1 (\text{condition}_i)+\beta_2 (\text{pretraining}_i)
+\end{aligned}
+\]</span></li>
+</ol>
+<p>Prior: <span class="math display">\[
+\begin{aligned}
+  \beta_0 \sim \mathcal{t4}(0, 2.5) \\
+  \quad \beta_1, \beta_2 \sim \mathcal{t4}(0, 1)
+\end{aligned}
+\]</span></p>
+<ol start="2" type="1">
+<li><span class="math display">\[
+\begin{aligned}
+{Y}_i &amp;\sim \text{Bin}(Nreward_i, \mu_i) \\
+logit(\mu_i) &amp;= \eta_i \\
+\eta_j &amp;= \beta_0 + \beta_1 (\text{condition}_i)+\beta_2 (\text{pretraining}_i)
+\end{aligned}
+\]</span></li>
+</ol>
+<p>Prior: <span class="math display">\[
+\begin{aligned}
+  \beta_0 \sim \mathcal{t4}(0, 2.5) \\
+  \quad \beta_1, \beta_2 \sim \mathcal{t4}(0, 1)
+\end{aligned}
+\]</span></p>
+<ol start="3" type="1">
+<li><span class="math display">\[
+\begin{aligned}
+{Y}_i &amp;\sim \text{Bin}(Nprobe_i, \mu_i) \\
+logit(\mu_i) &amp;= \eta_i \\
+\eta_j &amp;= \beta_0 + \beta_1 (\text{condition}_i)+\beta_2 (\text{pretraining}_i)
+\end{aligned}
+\]</span></li>
+</ol>
+<p>Prior: <span class="math display">\[
+\begin{aligned}
+  \beta_0 \sim \mathcal{t4}(0, 2.5) \\
+  \quad \beta_1, \beta_2 \sim \mathcal{t4}(0, 1)
+\end{aligned}
+\]</span></p>
+<ol start="4" type="1">
+<li><span class="math display">\[
+\begin{aligned}
+{Y}_i &amp;\sim \text{Bin}(Nprobe_i, \mu_i) \\
+logit(\mu_i) &amp;= \eta_i \\
+\eta_j &amp;= \beta_0 + \beta_1 (\text{condition}_i)+\beta_2 (\text{pretraining}_i)
+\end{aligned}
+\]</span></li>
+</ol>
+<p>Prior: <span class="math display">\[
+\begin{aligned}
+  \beta_0 \sim \mathcal{t4}(0, 2.5) \\
+  \quad \beta_1, \beta_2 \sim \mathcal{t4}(0, 1)
+\end{aligned}
+\]</span></p>
+<ol start="5" type="1">
+<li><span class="math display">\[
+\begin{aligned}
+{Y}_i &amp;\sim \text{Bin}(Npost training_i, \mu_i) \\
+logit(\mu_i) &amp;= \eta_i \\
+\eta_j &amp;= \beta_0 + \beta_1 (\text{condition}_i)+\beta_2 (\text{pretraining}_i)
+\end{aligned}
+\]</span></li>
+</ol>
+<p>Prior: <span class="math display">\[
+\begin{aligned}
+  \beta_0 \sim \mathcal{t4}(0, 2.5) \\
+  \quad \beta_1, \beta_2 \sim \mathcal{t4}(0, 1)
+\end{aligned}
+\]</span></p>
+<ol start="6" type="1">
+<li><span class="math display">\[
+\begin{aligned}
+{Y}_i &amp;\sim \text{Bin}(Nposttraining_i, \mu_i) \\
+logit(\mu_i) &amp;= \eta_i \\
+\eta_j &amp;= \beta_0 + \beta_1 (\text{condition}_i)+\beta_2 (\text{pretraining}_i)
+\end{aligned}
+\]</span></li>
+</ol>
+<p>Prior: <span class="math display">\[
+\begin{aligned}
+  \beta_0 \sim \mathcal{t4}(0, 2.5) \\
+  \quad \beta_1, \beta_2 \sim \mathcal{t4}(0, 1)
+\end{aligned}
+\]</span></p>
+<ol start="7" type="1">
+<li><span class="math display">\[
+\begin{aligned}
+{Y}_i &amp;\sim \text{Bin}(Nposttraining_i, \mu_i) \\
+logit(\mu_i) &amp;= \eta_i \\
+\eta_j &amp;= \beta_0 + \beta_1 (\text{condition}_i)+\beta_2 (\text{pretraining}_i)
+\end{aligned}
+\]</span></li>
+</ol>
+<p>Prior: <span class="math display">\[
+\begin{aligned}
+  \beta_0 \sim \mathcal{t4}(0, 2.5) \\
+  \quad \beta_1, \beta_2 \sim \mathcal{t4}(0, 1)
+\end{aligned}
+\]</span></p>
+<ol start="8" type="1">
+<li><span class="math display">\[
+\begin{aligned}
+{Y}_i &amp;\sim \text{Bin}(Nposttraining_i, \mu_i) \\
+logit(\mu_i) &amp;= \eta_i \\
+\eta_j &amp;= \beta_0 + \beta_1 (\text{condition}_i)+\beta_2 (\text{pretraining}_i)
+\end{aligned}
+\]</span></li>
+</ol>
+<p>Prior: <span class="math display">\[
+\begin{aligned}
+  \beta_0 \sim \mathcal{t4}(0, 2.5) \\
+  \quad \beta_1, \beta_2 \sim \mathcal{t4}(0, 1)
+\end{aligned}
+\]</span></p>
+<blockquote class="blockquote">
+<p>Do effort preferences on rewarded trials in the training section differ between the effort and performance conditions? (model1)</p>
+</blockquote>
+<section id="analysis" class="level2">
+<h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
+<p>We used 4 chains, each with 8,000 iterations (first 4,000 as warm-ups).</p>
+</section>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>summary_results1<span class="ot">&lt;-</span><span class="fu">summary</span>(model1)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>summary_results1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial 
+  Links: mu = logit 
+Formula: Y_reward | trials(N_reward) ~ condition + Y_pretraining + (1 | subj) 
+   Data: dtdotavgwide[condition %in% e_vs_p] (Number of observations: 509) 
+  Draws: 4 chains, each with iter = 8000; warmup = 4000; thin = 1;
+         total post-warmup draws = 16000
+
+Multilevel Hyperparameters:
+~subj (Number of levels: 509) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     1.99      0.08     1.84     2.16 1.00     2534     5829
+
+Regression Coefficients:
+                Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept          -3.25      0.19    -3.62    -2.88 1.00     1360     2172
+conditioneffort     1.88      0.19     1.50     2.26 1.01      886     1780
+Y_pretraining       0.11      0.01     0.09     0.13 1.00     1278     2452
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using 10 posterior draws for ppc type 'dens_overlay' by default.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As shown in the rank histogram in <a href="#fig-rank-hist-fit1" class="quarto-xref">Figure&nbsp;1</a> below, the chains mixed well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_draws</span>(model1) <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mcmc_rank_hist</span>(<span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-rank-hist-fit1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rank-hist-fit1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw8_files/figure-html/fig-rank-hist-fit1-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rank-hist-fit1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Rank histogram of the posterior distributions of model parameters.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#tbl-summ-fit1" class="quarto-xref">Table&nbsp;7</a> shows the posterior distributions of b_conditioneffort, b_Y_pretraining, b_Intercept.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>summ_fit1 <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(model1) <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset_draws</span>(<span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_draws</span>()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summ_fit1, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-fit1" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-fit1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;7: Posterior summary of the model parameters.
+</figcaption>
+<div aria-describedby="tbl-summ-fit1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">median</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">mad</th>
+<th style="text-align: right;">q5</th>
+<th style="text-align: right;">q95</th>
+<th style="text-align: right;">rhat</th>
+<th style="text-align: right;">ess_bulk</th>
+<th style="text-align: right;">ess_tail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">b_conditioneffort</td>
+<td style="text-align: right;">1.88</td>
+<td style="text-align: right;">1.88</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">1.56</td>
+<td style="text-align: right;">2.20</td>
+<td style="text-align: right;">1.01</td>
+<td style="text-align: right;">885.68</td>
+<td style="text-align: right;">1779.56</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b_Y_pretraining</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1277.74</td>
+<td style="text-align: right;">2452.38</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">b_Intercept</td>
+<td style="text-align: right;">-3.25</td>
+<td style="text-align: right;">-3.25</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">-3.56</td>
+<td style="text-align: right;">-2.94</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1359.72</td>
+<td style="text-align: right;">2171.65</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The analysis showed that effort preferences in rewarded trials under effort conditions were significantly higher than those in the performance condition., with a posterior mean of 1.88 and a 90% CI of [1.56, 2.2].</p>
+<blockquote class="blockquote">
+<p>Do effort preferences on rewarded trials in the training section differ between the effort and neutral conditions? (model2)</p>
+</blockquote>
+<section id="analysis-1" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-1">Analysis</h2>
+<p>We used 4 chains, each with 8,000 iterations (first 4,000 as warm-ups).</p>
+</section>
+</section>
+<section id="results-1" class="level1">
+<h1>Results</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>summary_results2<span class="ot">&lt;-</span><span class="fu">summary</span>(model2)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>summary_results2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial 
+  Links: mu = logit 
+Formula: Y_reward | trials(N_reward) ~ condition + Y_pretraining + (1 | subj) 
+   Data: dtdotavgwide[condition %in% e_vs_n] (Number of observations: 506) 
+  Draws: 4 chains, each with iter = 8000; warmup = 4000; thin = 1;
+         total post-warmup draws = 16000
+
+Multilevel Hyperparameters:
+~subj (Number of levels: 506) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     1.97      0.08     1.82     2.13 1.00     2516     5906
+
+Regression Coefficients:
+                Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept          -2.90      0.19    -3.27    -2.53 1.00     1357     3442
+conditioneffort     1.43      0.18     1.06     1.78 1.01      956     1977
+Y_pretraining       0.12      0.01     0.10     0.14 1.00     1611     3401
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using 10 posterior draws for ppc type 'dens_overlay' by default.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As shown in the rank histogram in <a href="#fig-rank-hist-fit2" class="quarto-xref">Figure&nbsp;2</a> below, the chains mixed well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_draws</span>(model2) <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mcmc_rank_hist</span>(<span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-rank-hist-fit2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rank-hist-fit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw8_files/figure-html/fig-rank-hist-fit2-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rank-hist-fit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Rank histogram of the posterior distributions of model parameters.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#tbl-summ-fit2" class="quarto-xref">Table&nbsp;8</a> shows the posterior distributions of b_conditioneffort, b_Y_pretraining, b_Intercept.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>summ_fit2 <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(model2) <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset_draws</span>(<span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_draws</span>()</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summ_fit2, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-fit2" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-fit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8: Posterior summary of the model parameters.
+</figcaption>
+<div aria-describedby="tbl-summ-fit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">median</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">mad</th>
+<th style="text-align: right;">q5</th>
+<th style="text-align: right;">q95</th>
+<th style="text-align: right;">rhat</th>
+<th style="text-align: right;">ess_bulk</th>
+<th style="text-align: right;">ess_tail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">b_conditioneffort</td>
+<td style="text-align: right;">1.43</td>
+<td style="text-align: right;">1.43</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">1.12</td>
+<td style="text-align: right;">1.72</td>
+<td style="text-align: right;">1.01</td>
+<td style="text-align: right;">956.29</td>
+<td style="text-align: right;">1976.95</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b_Y_pretraining</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1611.27</td>
+<td style="text-align: right;">3400.87</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">b_Intercept</td>
+<td style="text-align: right;">-2.90</td>
+<td style="text-align: right;">-2.90</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">-3.21</td>
+<td style="text-align: right;">-2.58</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1356.88</td>
+<td style="text-align: right;">3441.61</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The analysis showed that effort preferences in rewarded trials under effort conditions were significantly higher than those in the neutral condition., with a posterior mean of 1.43 and a 90% CI of [1.12, 1.72].</p>
+<blockquote class="blockquote">
+<p>Do effort preferences on probe (unrewarded) trials in the training section differ between the effort and performance conditions? (model3)</p>
+</blockquote>
+<section id="analysis-2" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-2">Analysis</h2>
+<p>We used 4 chains, each with 8,000 iterations (first 4,000 as warm-ups).</p>
+</section>
+</section>
+<section id="results-2" class="level1">
+<h1>Results</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>summary_results3<span class="ot">&lt;-</span><span class="fu">summary</span>(model3)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>summary_results3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial 
+  Links: mu = logit 
+Formula: Y_probe | trials(N_probe) ~ condition + Y_pretraining + (1 | subj) 
+   Data: dtdotavgwide[condition %in% e_vs_p] (Number of observations: 509) 
+  Draws: 4 chains, each with iter = 8000; warmup = 4000; thin = 1;
+         total post-warmup draws = 16000
+
+Multilevel Hyperparameters:
+~subj (Number of levels: 509) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     1.64      0.07     1.51     1.78 1.00     4254     7509
+
+Regression Coefficients:
+                Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept          -1.84      0.16    -2.15    -1.53 1.00     2432     5086
+conditioneffort     0.24      0.16    -0.07     0.54 1.00     2290     4790
+Y_pretraining       0.08      0.01     0.06     0.09 1.00     2760     4393
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using 10 posterior draws for ppc type 'dens_overlay' by default.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As shown in the rank histogram in <a href="#fig-rank-hist-fit3" class="quarto-xref">Figure&nbsp;3</a> below, the chains mixed well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_draws</span>(model3) <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mcmc_rank_hist</span>(<span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-rank-hist-fit3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rank-hist-fit3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw8_files/figure-html/fig-rank-hist-fit3-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rank-hist-fit3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Rank histogram of the posterior distributions of model parameters.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#tbl-summ-fit3" class="quarto-xref">Table&nbsp;9</a> shows the posterior distributions of b_conditioneffort, b_Y_pretraining, b_Intercept.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>summ_fit3 <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(model3) <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset_draws</span>(<span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_draws</span>()</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summ_fit3, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-fit3" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-fit3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9: Posterior summary of the model parameters.
+</figcaption>
+<div aria-describedby="tbl-summ-fit3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">median</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">mad</th>
+<th style="text-align: right;">q5</th>
+<th style="text-align: right;">q95</th>
+<th style="text-align: right;">rhat</th>
+<th style="text-align: right;">ess_bulk</th>
+<th style="text-align: right;">ess_tail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">b_conditioneffort</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">-0.02</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2290.08</td>
+<td style="text-align: right;">4790.21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b_Y_pretraining</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2760.47</td>
+<td style="text-align: right;">4393.16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">b_Intercept</td>
+<td style="text-align: right;">-1.84</td>
+<td style="text-align: right;">-1.84</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">-2.10</td>
+<td style="text-align: right;">-1.58</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2432.21</td>
+<td style="text-align: right;">5085.97</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The analysis showed that effort preferences in probe trials under effort conditions were not significantly higher than those in the performance condition., with a posterior mean of 0.24 and a 90% CI of [-0.02, 0.49].</p>
+<blockquote class="blockquote">
+<p>Do effort preferences on probe (unrewarded) trials in the training section differ between the effort and neutral conditons? (model4)</p>
+</blockquote>
+<section id="analysis-3" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-3">Analysis</h2>
+<p>We used 4 chains, each with 8,000 iterations (first 4,000 as warm-ups).</p>
+</section>
+</section>
+<section id="results-3" class="level1">
+<h1>Results</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>summary_results4<span class="ot">&lt;-</span><span class="fu">summary</span>(model4)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>summary_results4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial 
+  Links: mu = logit 
+Formula: Y_probe | trials(N_probe) ~ condition + Y_pretraining + (1 | subj) 
+   Data: dtdotavgwide[condition %in% e_vs_n] (Number of observations: 506) 
+  Draws: 4 chains, each with iter = 8000; warmup = 4000; thin = 1;
+         total post-warmup draws = 16000
+
+Multilevel Hyperparameters:
+~subj (Number of levels: 506) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     1.45      0.06     1.32     1.58 1.00     4635     8686
+
+Regression Coefficients:
+                Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept          -1.89      0.14    -2.17    -1.61 1.00     4290     7665
+conditioneffort     0.22      0.14    -0.05     0.49 1.00     3894     6609
+Y_pretraining       0.08      0.01     0.07     0.10 1.00     3937     6389
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using 10 posterior draws for ppc type 'dens_overlay' by default.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As shown in the rank histogram in <a href="#fig-rank-hist-fit4" class="quarto-xref">Figure&nbsp;4</a> below, the chains mixed well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_draws</span>(model4) <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mcmc_rank_hist</span>(<span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-rank-hist-fit4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rank-hist-fit4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw8_files/figure-html/fig-rank-hist-fit4-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rank-hist-fit4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Rank histogram of the posterior distributions of model parameters.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#tbl-summ-fit4" class="quarto-xref">Table&nbsp;10</a> shows the posterior distributions of b_conditioneffort, b_Y_pretraining, b_Intercept.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>summ_fit4 <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(model4) <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset_draws</span>(<span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_draws</span>()</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summ_fit4, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-fit4" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-fit4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10: Posterior summary of the model parameters.
+</figcaption>
+<div aria-describedby="tbl-summ-fit4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">median</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">mad</th>
+<th style="text-align: right;">q5</th>
+<th style="text-align: right;">q95</th>
+<th style="text-align: right;">rhat</th>
+<th style="text-align: right;">ess_bulk</th>
+<th style="text-align: right;">ess_tail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">b_conditioneffort</td>
+<td style="text-align: right;">0.224</td>
+<td style="text-align: right;">0.224</td>
+<td style="text-align: right;">0.140</td>
+<td style="text-align: right;">0.140</td>
+<td style="text-align: right;">-0.009</td>
+<td style="text-align: right;">0.452</td>
+<td style="text-align: right;">1.001</td>
+<td style="text-align: right;">3894.378</td>
+<td style="text-align: right;">6608.948</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b_Y_pretraining</td>
+<td style="text-align: right;">0.082</td>
+<td style="text-align: right;">0.082</td>
+<td style="text-align: right;">0.007</td>
+<td style="text-align: right;">0.007</td>
+<td style="text-align: right;">0.071</td>
+<td style="text-align: right;">0.094</td>
+<td style="text-align: right;">1.001</td>
+<td style="text-align: right;">3936.660</td>
+<td style="text-align: right;">6388.507</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">b_Intercept</td>
+<td style="text-align: right;">-1.889</td>
+<td style="text-align: right;">-1.889</td>
+<td style="text-align: right;">0.143</td>
+<td style="text-align: right;">0.142</td>
+<td style="text-align: right;">-2.128</td>
+<td style="text-align: right;">-1.655</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">4289.605</td>
+<td style="text-align: right;">7665.380</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The analysis showed that effort preferences in probe trials under effort conditions were not significantly higher than those in the neutral condition., with a posterior mean of 0.224 and a 90% CI of [-0.009, 0.452].</p>
+<blockquote class="blockquote">
+<p>Do effort preferences on the dot-motion task in the post-training section differ between the effort and performance conditions? (model5)</p>
+</blockquote>
+<section id="analysis-4" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-4">Analysis</h2>
+<p>We used 4 chains, each with 8,000 iterations (first 4,000 as warm-ups).</p>
+</section>
+</section>
+<section id="results-4" class="level1">
+<h1>Results</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>summary_results5<span class="ot">&lt;-</span><span class="fu">summary</span>(model5)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>summary_results5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial 
+  Links: mu = logit 
+Formula: Y_posttraining | trials(N_posttraining) ~ condition + Y_pretraining + (1 | subj) 
+   Data: dtdotavgwide[condition %in% e_vs_p] (Number of observations: 509) 
+  Draws: 4 chains, each with iter = 8000; warmup = 4000; thin = 1;
+         total post-warmup draws = 16000
+
+Multilevel Hyperparameters:
+~subj (Number of levels: 509) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     1.81      0.09     1.65     1.99 1.00     3415     6663
+
+Regression Coefficients:
+                Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept          -4.00      0.20    -4.41    -3.62 1.00     3239     6244
+conditioneffort     0.50      0.18     0.15     0.85 1.00     1833     3426
+Y_pretraining       0.15      0.01     0.14     0.17 1.00     2884     5737
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(model5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using 10 posterior draws for ppc type 'dens_overlay' by default.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As shown in the rank histogram in <a href="#fig-rank-hist-fit5" class="quarto-xref">Figure&nbsp;5</a> below, the chains mixed well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_draws</span>(model5) <span class="sc">|&gt;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mcmc_rank_hist</span>(<span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-rank-hist-fit5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rank-hist-fit5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw8_files/figure-html/fig-rank-hist-fit5-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rank-hist-fit5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Rank histogram of the posterior distributions of model parameters.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#tbl-summ-fit5" class="quarto-xref">Table&nbsp;11</a> shows the posterior distributions of b_conditioneffort, b_Y_pretraining, b_Intercept.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>summ_fit5 <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(model5) <span class="sc">|&gt;</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset_draws</span>(<span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_draws</span>()</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summ_fit5, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-fit5" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-fit5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11: Posterior summary of the model parameters.
+</figcaption>
+<div aria-describedby="tbl-summ-fit5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">median</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">mad</th>
+<th style="text-align: right;">q5</th>
+<th style="text-align: right;">q95</th>
+<th style="text-align: right;">rhat</th>
+<th style="text-align: right;">ess_bulk</th>
+<th style="text-align: right;">ess_tail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">b_conditioneffort</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1833.10</td>
+<td style="text-align: right;">3426.29</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b_Y_pretraining</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2883.81</td>
+<td style="text-align: right;">5736.92</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">b_Intercept</td>
+<td style="text-align: right;">-4.00</td>
+<td style="text-align: right;">-4.00</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">-4.34</td>
+<td style="text-align: right;">-3.67</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3238.86</td>
+<td style="text-align: right;">6243.68</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The analysis showed that effort preferences in post-training section under effort conditions were significantly higher than those in the performance condition in dot motion task, with a posterior mean of 0.5 and a 90% CI of [0.21, 0.79].</p>
+<blockquote class="blockquote">
+<p>Do effort preferences on the dot-motion task in the post-training section differ between the effort and neutral conditions? (model6)</p>
+</blockquote>
+<section id="analysis-5" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-5">Analysis</h2>
+<p>We used 4 chains, each with 8,000 iterations (first 4,000 as warm-ups).</p>
+</section>
+</section>
+<section id="results-5" class="level1">
+<h1>Results</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>summary_results6<span class="ot">&lt;-</span><span class="fu">summary</span>(model6)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>summary_results6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial 
+  Links: mu = logit 
+Formula: Y_posttraining | trials(N_posttraining) ~ condition + Y_pretraining + (1 | subj) 
+   Data: dtdotavgwide[condition %in% e_vs_n] (Number of observations: 506) 
+  Draws: 4 chains, each with iter = 8000; warmup = 4000; thin = 1;
+         total post-warmup draws = 16000
+
+Multilevel Hyperparameters:
+~subj (Number of levels: 506) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     1.74      0.09     1.58     1.92 1.00     4510     9081
+
+Regression Coefficients:
+                Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept          -3.90      0.20    -4.31    -3.52 1.00     5958     9257
+conditioneffort     0.24      0.17    -0.10     0.58 1.00     3304     6588
+Y_pretraining       0.17      0.01     0.15     0.19 1.00     5329     8502
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(model6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using 10 posterior draws for ppc type 'dens_overlay' by default.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As shown in the rank histogram in <a href="#fig-rank-hist-fit6" class="quarto-xref">Figure&nbsp;6</a> below, the chains mixed well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_draws</span>(model6) <span class="sc">|&gt;</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mcmc_rank_hist</span>(<span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-rank-hist-fit6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rank-hist-fit6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw8_files/figure-html/fig-rank-hist-fit6-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rank-hist-fit6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Rank histogram of the posterior distributions of model parameters.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#tbl-summ-fit6" class="quarto-xref">Table&nbsp;12</a> shows the posterior distributions of b_conditioneffort, b_Y_pretraining, b_Intercept.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>summ_fit6 <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(model6) <span class="sc">|&gt;</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset_draws</span>(<span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_draws</span>()</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summ_fit6, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-fit6" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-fit6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;12: Posterior summary of the model parameters.
+</figcaption>
+<div aria-describedby="tbl-summ-fit6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">median</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">mad</th>
+<th style="text-align: right;">q5</th>
+<th style="text-align: right;">q95</th>
+<th style="text-align: right;">rhat</th>
+<th style="text-align: right;">ess_bulk</th>
+<th style="text-align: right;">ess_tail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">b_conditioneffort</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">-0.04</td>
+<td style="text-align: right;">0.53</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3303.96</td>
+<td style="text-align: right;">6588.48</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b_Y_pretraining</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5328.70</td>
+<td style="text-align: right;">8502.33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">b_Intercept</td>
+<td style="text-align: right;">-3.90</td>
+<td style="text-align: right;">-3.90</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">-4.24</td>
+<td style="text-align: right;">-3.58</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5957.65</td>
+<td style="text-align: right;">9257.18</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The analysis showed that effort preferences in post-training section under effort conditions were not significantly higher than those in the neutral condition in dot motion task, with a posterior mean of 0.24 and a 90% CI of [-0.04, 0.53].</p>
+<blockquote class="blockquote">
+<p>Do effort preferences on the math task in the post-training section differ between the effort and performance conditions? (model7)</p>
+</blockquote>
+<section id="analysis-6" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-6">Analysis</h2>
+<p>We used 4 chains, each with 8,000 iterations (first 4,000 as warm-ups).</p>
+</section>
+</section>
+<section id="results-6" class="level1">
+<h1>Results</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>summary_results7<span class="ot">&lt;-</span><span class="fu">summary</span>(model7)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>summary_results7</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial 
+  Links: mu = logit 
+Formula: Y_posttraining | trials(N_posttraining) ~ condition + Y_pretraining + (1 | subj) 
+   Data: dtmathavgwide[condition %in% e_vs_p] (Number of observations: 509) 
+  Draws: 4 chains, each with iter = 8000; warmup = 4000; thin = 1;
+         total post-warmup draws = 16000
+
+Multilevel Hyperparameters:
+~subj (Number of levels: 509) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     1.20      0.06     1.08     1.33 1.00     5075     8143
+
+Regression Coefficients:
+                Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept          -4.09      0.17    -4.43    -3.77 1.00     6967    10143
+conditioneffort     0.28      0.13     0.03     0.54 1.00     4728     8083
+Y_pretraining       0.17      0.01     0.15     0.18 1.00     6482     9783
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model7)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(model7)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using 10 posterior draws for ppc type 'dens_overlay' by default.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As shown in the rank histogram in <a href="#fig-rank-hist-fit7" class="quarto-xref">Figure&nbsp;7</a> below, the chains mixed well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_draws</span>(model7) <span class="sc">|&gt;</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mcmc_rank_hist</span>(<span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-rank-hist-fit7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rank-hist-fit7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw8_files/figure-html/fig-rank-hist-fit7-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rank-hist-fit7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Rank histogram of the posterior distributions of model parameters.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#tbl-summ-fit7" class="quarto-xref">Table&nbsp;13</a> shows the posterior distributions of b_conditioneffort, b_Y_pretraining, b_Intercept.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>summ_fit7 <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(model7) <span class="sc">|&gt;</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset_draws</span>(<span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_draws</span>()</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summ_fit7, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-fit7" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-fit7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;13: Posterior summary of the model parameters.
+</figcaption>
+<div aria-describedby="tbl-summ-fit7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">median</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">mad</th>
+<th style="text-align: right;">q5</th>
+<th style="text-align: right;">q95</th>
+<th style="text-align: right;">rhat</th>
+<th style="text-align: right;">ess_bulk</th>
+<th style="text-align: right;">ess_tail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">b_conditioneffort</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4728.16</td>
+<td style="text-align: right;">8082.62</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b_Y_pretraining</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6482.34</td>
+<td style="text-align: right;">9782.76</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">b_Intercept</td>
+<td style="text-align: right;">-4.09</td>
+<td style="text-align: right;">-4.09</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">-4.37</td>
+<td style="text-align: right;">-3.82</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6967.35</td>
+<td style="text-align: right;">10142.59</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The analysis showed that effort preferences in post-training section under effort conditions were significantly higher than those in the performance condition in math task, with a posterior mean of 0.28 and a 90% CI of [0.07, 0.49].</p>
+<blockquote class="blockquote">
+<p>Do effort preferences on the math task in the post-training section differ between the effort and neutral conditions? (model8)</p>
+</blockquote>
+<section id="analysis-7" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-7">Analysis</h2>
+<p>We used 4 chains, each with 8,000 iterations (first 4,000 as warm-ups).</p>
+</section>
+</section>
+<section id="results-7" class="level1">
+<h1>Results</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>summary_results8<span class="ot">&lt;-</span><span class="fu">summary</span>(model8)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>summary_results8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial 
+  Links: mu = logit 
+Formula: Y_posttraining | trials(N_posttraining) ~ condition + Y_pretraining + (1 | subj) 
+   Data: dtmathavgwide[condition %in% e_vs_n] (Number of observations: 506) 
+  Draws: 4 chains, each with iter = 8000; warmup = 4000; thin = 1;
+         total post-warmup draws = 16000
+
+Multilevel Hyperparameters:
+~subj (Number of levels: 506) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     1.25      0.06     1.13     1.37 1.00     4503     8180
+
+Regression Coefficients:
+                Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept          -3.80      0.17    -4.14    -3.48 1.00     6142     9449
+conditioneffort     0.20      0.13    -0.05     0.45 1.00     4012     6818
+Y_pretraining       0.16      0.01     0.14     0.17 1.00     5705     9280
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(model8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using 10 posterior draws for ppc type 'dens_overlay' by default.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw8_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As shown in the rank histogram in <a href="#fig-rank-hist-fit8" class="quarto-xref">Figure&nbsp;8</a> below, the chains mixed well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_draws</span>(model8) <span class="sc">|&gt;</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mcmc_rank_hist</span>(<span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-rank-hist-fit8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rank-hist-fit8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="hw8_files/figure-html/fig-rank-hist-fit8-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rank-hist-fit8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Rank histogram of the posterior distributions of model parameters.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#tbl-summ-fit8" class="quarto-xref">Table&nbsp;14</a> shows the posterior distributions of b_conditioneffort, b_Y_pretraining, b_Intercept.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>summ_fit8 <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(model8) <span class="sc">|&gt;</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset_draws</span>(<span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_conditioneffort"</span>, <span class="st">"b_Y_pretraining"</span>, <span class="st">"b_Intercept"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_draws</span>()</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summ_fit8, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summ-fit8" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summ-fit8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;14: Posterior summary of the model parameters.
+</figcaption>
+<div aria-describedby="tbl-summ-fit8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">median</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">mad</th>
+<th style="text-align: right;">q5</th>
+<th style="text-align: right;">q95</th>
+<th style="text-align: right;">rhat</th>
+<th style="text-align: right;">ess_bulk</th>
+<th style="text-align: right;">ess_tail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">b_conditioneffort</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">-0.01</td>
+<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4012.31</td>
+<td style="text-align: right;">6818.20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b_Y_pretraining</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5705.01</td>
+<td style="text-align: right;">9280.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">b_Intercept</td>
+<td style="text-align: right;">-3.80</td>
+<td style="text-align: right;">-3.80</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">-4.08</td>
+<td style="text-align: right;">-3.53</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6141.74</td>
+<td style="text-align: right;">9448.81</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The analysis showed that effort preferences in post-training section under effort conditions were not significantly higher than those in the neutral condition in math task, with a posterior mean of 0.2 and a 90% CI of [-0.01, 0.41].</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
