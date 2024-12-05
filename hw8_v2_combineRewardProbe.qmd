@@ -1,0 +1,511 @@
+---
+title: "HW 8"
+author:
+  - "Shuning Wang"
+  - "April Luo"
+  - "Chang Lu" 
+date: "`r Sys.Date()`"
+echo: false
+format:
+  gfm:
+    toc: true
+    html-math-method: webtex
+---
+
+```{r}
+#| message: false
+#| echo: false
+library(brms)
+library(data.table)
+library(here)
+library(modelsummary)  # for summarizing data
+library(posterior)
+library(bayesplot)
+library(dplyr)
+library(knitr)
+library(rmarkdown)
+library(ggplot2)
+library(tidyr)
+library(emmeans)
+```
+
+# Research Question
+
+> Do effort preferences on rewarded trials in the training section differ between the effort and performance conditions? (model1) 
+
+> Do effort preferences on rewarded trials in the training section differ between the effort and neutral conditions? (model1) 
+
+> Do effort preferences on probe (unrewarded) trials in the training section differ between the effort and performance conditions? (model1) 
+
+> Do effort preferences on probe (unrewarded) trials in the training section differ between the effort and neutral conditons? (model1) 
+
+> Do effort preferences on the dot-motion task in the post-training section differ between the effort and performance conditions? (model2) 
+
+> Do effort preferences on the dot-motion task in the post-training section differ between the effort and neutral conditions? (model2) 
+
+> Do effort preferences on the math task in the post-training section differ between the effort and performance conditions? (model3) 
+
+> Do effort preferences on the math task in the post-training section differ between the effort and neutral conditions? (model3)
+
+#Summary of the study design:
+
+The entire study is divided into three sections: the pre-training section, the training section, and the post-training section. The pre-training section includes two types of cognitive tasks: the dot motion task and the math task. This section is designed to establish a baseline for participants regarding their effort expenditure. The training section is further divided into reward trials and probe trials (unrewarded), with three conditions: reward, performance, and neutral. It employs a between-subjects design to manipulate participants' effort preferences based on the different conditions, but it includes only one cognitive task, which is the dot motion task. In the post-training section, two cognitive tasks are included: the dot motion task and the math task. The dot motion task aims to demonstrate that the manipulation in the training section has a lasting effect over time. Meanwhile, the math task is designed to show that this training not only has a sustained effect on the same task but also exerts an influence across different tasks.
+
+# Variables in dtdotavgwide (dotmotion task dataset)
+
+-   `condition`: performance(The higher the accuracy of the task, the greater the reward), effort(Choosing the hard task yields a high reward, while choosing the easy task results in a low reward), neutral(The reward is a fixed value.).
+-   `reward`: The proportion of participants choosing the hard difficulty task in the reward trials during the training section (N_reward = 40 for each subject).
+-   `Y_reward`: The number of trials in which participants chose the hard difficulty task during the reward trials in the training section (Y_reward =reward \* N_reward).
+-   `probe`: The proportion of participants choosing the hard difficulty task in the unreward trials during the training section (N_probe = 20 for each subject).
+-   `Y_probe`: The number of trials in which participants chose the hard difficulty task during the unreward trials in the training section (Y_reward = probe \* N_probe).
+-   `pre_training`: The proportion of participants choosing the hard difficulty task in the trials of the pre-training section (N_pretraining = 40).
+-   `Y_pretraining`: The number of trials in which participants chose the hard difficulty task during the trials in the pre-training section (Y_pretraining = pre_training \* N_pretraining).
+-   `post_training`: The proportion of participants choosing the hard difficulty task in the trials of the post_training section (N_posttraining = 20).
+-   `Y_posttraining`: The number of trials in which participants chose the hard difficulty task during the trials in the post-training section (Y_posttraining = post_training \* N_posttraining).
+
+# Variables in dtmathavgwide (math task dataset)
+
+The math task will not appear in the training section (reward trials + probe trials), so the math task dataset does not include any probe or reward trials. - `condition`: Same as above. - `pre_training`: Same as above. - `Y_pretraining`: Same as above. - `post_training`: Same as above. - `Y_posttraining`: Same as above.
+
+## Data Import
+
+```{r}
+dtdotavgwide <- fread("/Users/wangshuning/Desktop/USC/24Fall/573Bayesian/project/osfstorage-archive/data/clean/dot_wide.csv")
+dtmathavgwide <- fread("/Users/wangshuning/Desktop/USC/24Fall/573Bayesian/project/osfstorage-archive/data/clean/math_wide.csv")
+
+dotCombineRewardProbe<- fread("/Users/wangshuning/Desktop/USC/24Fall/573Bayesian/project/osfstorage-archive/data/clean/dot_wide_combinRewardProbe.csv")
+
+#dtdotavgwide[, condition := factor(condition, levels = c("performance", "neutral", "effort"))]
+#dtmathavgwide[, condition := factor(condition, levels = c("performance", "neutral", "effort"))]
+
+#e_vs_p <- c("effort", "performance")
+#e_vs_n <- c("effort", "neutral")
+#n_vs_p <- c("neutral", "performance")
+
+```
+
+## Variable Summary
+
+Table @tbl-summ-var1 displays the summary statistics of effort preferences for the dot motion task in the pre-training(baseline) section by condition.
+
+```{r}
+#| label: tbl-summ-var1
+#| tbl-cap: Descriptive statistics by condition for effort preferences for the dot motion task in the pre-training section
+datasummary(Y_pretraining  * 
+                (N + Mean + SD + Min + Max + Histogram) ~ 
+                factor(condition, labels = c("performance", "neutral", "effort")),
+            data = dtdotavgwide)
+```
+
+Table @tbl-summ-var2 displays the summary statistics of effort preferences for the dot motion task during the rewarded trials in the training section, categorized by condition.
+
+```{r}
+#| label: tbl-summ-var2
+#| tbl-cap: Descriptive statistics by condition for effort preferences on rewarded trials in the training section for the dot motion task 
+datasummary(Y_reward  * 
+                (N + Mean + SD + Min + Max + Histogram) ~ 
+                factor(condition, labels = c("performance", "neutral", "effort")),
+            data = dtdotavgwide)
+```
+
+Table @tbl-summ-var3 displays the summary statistics of effort preferences for the dot motion task during the unrewarded trials (probe trials) in the training section, categorized by condition.
+
+```{r}
+#| label: tbl-summ-var3
+#| tbl-cap: Descriptive statistics by condition for effort preferences on unrewarded trials (probe trials) in the training section for the dot motion task 
+datasummary(Y_probe  * 
+                (N + Mean + SD + Min + Max + Histogram) ~ 
+                factor(condition, labels = c("performance", "neutral", "effort")),
+            data = dtdotavgwide)
+```
+
+Table @tbl-summ-var4 displays the summary statistics of effort preferences for the dot motion task in the post-training section by condition.
+
+```{r}
+#| label: tbl-summ-var4
+#| tbl-cap: Descriptive statistics by condition for effort preferences for the dot motion task in the post-training section
+datasummary(Y_posttraining  * 
+                (N + Mean + SD + Min + Max + Histogram) ~ 
+                factor(condition, labels = c("performance", "neutral", "effort")),
+            data = dtdotavgwide)
+```
+
+Table @tbl-summ-var5 displays the summary statistics of effort preferences for the math task in the pre-training section by condition.
+
+```{r}
+#| label: tbl-summ-var5
+#| tbl-cap: Descriptive statistics by condition for effort preferences for the math task in the pre-training section
+datasummary(Y_pretraining  * 
+                (N + Mean + SD + Min + Max + Histogram) ~ 
+                factor(condition, labels = c("performance", "neutral", "effort")),
+            data = dtmathavgwide)
+```
+
+Table @tbl-summ-var6 displays the summary statistics of effort preferences for the math task in the post-training section by condition.
+
+```{r}
+#| label: tbl-summ-var6
+#| tbl-cap: Descriptive statistics by condition for effort preferences for the math task in the post-training section
+datasummary(Y_posttraining  * 
+                (N + Mean + SD + Min + Max + Histogram) ~ 
+                factor(condition, labels = c("performance", "neutral", "effort")),
+            data = dtmathavgwide)
+```
+
+
+
+> Do effort preferences on rewarded trials in the training section differ between the effort and performance conditions? (model1) 
+
+> Do effort preferences on rewarded trials in the training section differ between the effort and neutral conditions? (model1) 
+
+> Do effort preferences on probe (unrewarded) trials in the training section differ between the effort and performance conditions? (model1) 
+
+> Do effort preferences on probe (unrewarded) trials in the training section differ between the effort and neutral conditons? (model1) 
+
+
+## Analysis
+
+We used 4 chains, each with 8,000 iterations (first 4,000 as warm-ups).
+
+```{r}
+#| include: false
+dotCombineRewardProbe$condition <- as.factor(dotCombineRewardProbe$condition)
+dotCombineRewardProbe$condition <- relevel(dotCombineRewardProbe$condition, ref = "effort")
+
+
+priors <- c(
+  prior(student_t(4, 0, 1), class = "b"),           
+  prior(student_t(4, 0, 2.5), class = "Intercept")  
+  
+)
+
+model1 <- brm(
+  Y_training | trials(N_training) ~ trainingTrialType*(condition + pre_training) + (trainingTrialType | subj),  
+  data = dotCombineRewardProbe,                                     
+  family = binomial(link = "logit"),                      
+  prior = priors,
+  iter = 8000,                                            
+  chains = 4, 
+  control = list(adapt_delta = 0.99),
+  cores = 4,
+  save_pars = save_pars(all = TRUE)
+)
+
+```
+
+# Results
+
+```{r}
+summary_results1<-summary(model1)
+summary_results1
+```
+
+```{r}
+plot(model1)
+```
+
+```{r}
+pp_check(model1)
+```
+
+
+
+```{r}
+pp_check(model1, type = "dens_overlay_grouped", group = "trainingTrialType")
+```
+
+
+
+```{r}
+pp_check(model1, type = "dens_overlay_grouped", group = "condition")
+```
+
+
+
+```{r}
+#| label: fig-rank-hist-fit1
+#| fig-cap: Rank histogram of the posterior distributions of model parameters.
+as_draws(model1) |>
+  mcmc_rank_hist(pars = c("b_Intercept","b_trainingTrialTypereward","b_conditionneutral","b_conditionperformance","b_pre_training","b_trainingTrialTypereward:conditionneutral","b_trainingTrialTypereward:conditionperformance","b_trainingTrialTypereward:pre_training","sd_subj__Intercept","sd_subj__trainingTrialTypereward"))
+
+#parnames(model1)
+
+```
+
+@tbl-summ-fit1 shows the posterior distributions 
+
+```{r}
+#| label: tbl-summ-fit1
+#| tbl-cap: Posterior summary of the model parameters.
+
+summ_fit1 <- as_draws_df(model1) |>
+  subset_draws(variable = c("b_Intercept","b_trainingTrialTypereward","b_conditionneutral","b_conditionperformance","b_pre_training","b_trainingTrialTypereward:conditionneutral","b_trainingTrialTypereward:conditionperformance","b_trainingTrialTypereward:pre_training","sd_subj__Intercept","sd_subj__trainingTrialTypereward")) |>
+  summarise_draws()
+
+
+knitr::kable(summ_fit1, digits = 2)
+
+```
+
+```{r}
+as_draws(model1) |>
+    mutate_variables(
+        b_reward_effort = `b_trainingTrialTypereward`, # reward effect in effort condition
+        b_reward_neutral = `b_trainingTrialTypereward` + `b_trainingTrialTypereward:conditionneutral`, # reward effect in neutral condition
+        b_reward_performance = `b_trainingTrialTypereward` + `b_trainingTrialTypereward:conditionperformance` # reward effect in performance condition
+    ) |>
+    posterior::subset_draws(
+        variable = c("b_reward_effort", "b_reward_neutral", "b_reward_performance")
+    ) |>
+    summarize_draws() |>
+    knitr::kable(digits = 2)
+```
+
+```{r}
+as_draws(model1) |>
+    mutate_variables(
+        b_probe_effort = 0, # probe effect in effort condition is baseline（0）
+        b_probe_neutral = `b_conditionneutral`, # probe effect in neutral condition
+        b_probe_performance = `b_conditionperformance` # probe effect in performance condition
+    ) |>
+    posterior::subset_draws(
+        variable = c("b_probe_effort", "b_probe_neutral", "b_probe_performance")
+    ) |>
+    summarize_draws() |>
+    knitr::kable(digits = 2)
+
+```
+
+
+
+```{r}
+conditional_effects(model1)
+```
+
+
+
+
+```{r}
+newdata <- expand.grid(
+  trainingTrialType = c("reward", "probe"), 
+  condition = c("neutral", "performance", "effort"), 
+  pre_training = mean(dotCombineRewardProbe$pre_training, na.rm = TRUE)
+  #subj = NA  
+)
+
+
+newdata$N_training <- ifelse(newdata$trainingTrialType == "reward", 40, 20)
+
+
+predictions <- posterior_epred(model1, newdata = newdata, re_formula = NA)
+
+# extract mean prediction trials numbers
+newdata$predicted <- colMeans(predictions)
+
+#  95% CI
+newdata$l95 <- apply(predictions, 2, quantile, probs = 0.025)
+newdata$u95 <- apply(predictions, 2, quantile, probs = 0.975)
+
+
+#Plot
+ggplot(newdata, aes(x = trainingTrialType, y = predicted, color = condition)) +
+  geom_point(position = position_dodge(width = 0.2), size = 3) +
+  geom_line(aes(group = condition), position = position_dodge(width = 0.2), size = 1) +
+  geom_errorbar(aes(ymin = l95, ymax = u95), width = 0.1, position = position_dodge(width = 0.2)) +
+  labs(title = "Interaction Effect of Training Trial Type and Condition",
+       x = "Training Trial Type",
+       y = "Predicted hard trials number",
+       color = "Condition") +
+  theme_minimal()
+
+
+```
+
+```{r}
+# pairwise comparisons for trainingTrialType * condition
+pairwise_comparisons <- emmeans(model1, pairwise ~ trainingTrialType | condition, type = "response")
+
+summary(pairwise_comparisons)
+
+```
+
+
+
+
+> Do effort preferences on the dot-motion task in the post-training section differ between the effort and performance conditions? (model2) 
+
+> Do effort preferences on the dot-motion task in the post-training section differ between the effort and neutral conditions? (model2) 
+
+
+## Analysis
+
+We used 4 chains, each with 8,000 iterations (first 4,000 as warm-ups).
+
+```{r}
+#| include: false
+
+dtdotavgwide$condition <- as.factor(dtdotavgwide$condition)
+dtdotavgwide$condition <- relevel(dtdotavgwide$condition, ref = "effort")
+
+priors <- c(
+  prior(student_t(4, 0, 1), class = "b"),           
+  prior(student_t(4, 0, 2.5), class = "Intercept")  
+  
+)
+
+model2 <- brm(
+  Y_posttraining|trials(N_posttraining) ~ condition + pre_training + (1 | subj),  
+  data=dtdotavgwide,                                    
+  family = binomial(link = "logit"),                      
+  prior = priors,
+  iter = 8000,                                            
+  chains = 4, 
+  control = list(adapt_delta = 0.99),
+  cores = 4,
+  save_pars = save_pars(all = TRUE)
+)
+
+```
+
+# Results
+
+```{r}
+summary_results2<-summary(model2)
+summary_results2
+```
+
+```{r}
+plot(model2)
+```
+
+```{r}
+pp_check(model2)
+```
+
+
+
+```{r}
+pp_check(model2, type = "dens_overlay_grouped", group = "condition")
+```
+
+
+
+As shown in the rank histogram in @fig-rank-hist-fit2 below, the chains didn't mix well.
+
+```{r}
+#| label: fig-rank-hist-fit2
+#| fig-cap: Rank histogram of the posterior distributions of model parameters.
+as_draws(model2) |>
+  mcmc_rank_hist(pars = c("b_conditionperformance", "b_conditionneutral", "b_pre_training", "b_Intercept"))
+```
+
+@tbl-summ-fit2 shows the posterior distributions of "b_conditionperformance", "b_conditionneutral", "b_pre_training", "b_Intercept".
+
+```{r}
+#| label: tbl-summ-fit2
+#| tbl-cap: Posterior summary of the model parameters.
+
+summ_fit2 <- as_draws_df(model2) |>
+  subset_draws(variable = c("b_conditionperformance", "b_conditionneutral", "b_pre_training", "b_Intercept")) |>
+  summarise_draws()
+
+
+knitr::kable(summ_fit2, digits = 2)
+
+```
+
+```{r}
+conditional_effects(model2)
+```
+
+> Do effort preferences on the math task in the post-training section differ between the effort and performance conditions? (model3) 
+
+> Do effort preferences on the math task in the post-training section differ between the effort and neutral conditions? (model3)
+
+## Analysis
+
+We used 4 chains, each with 8,000 iterations (first 4,000 as warm-ups).
+
+```{r}
+#| include: false
+
+dtmathavgwide$condition <- as.factor(dtmathavgwide$condition)
+dtmathavgwide$condition <- relevel(dtmathavgwide$condition, ref = "effort")
+
+priors <- c(
+  prior(student_t(4, 0, 1), class = "b"),           
+  prior(student_t(4, 0, 2.5), class = "Intercept")  
+  
+)
+
+model3 <- brm(
+  Y_posttraining|trials(N_posttraining) ~ condition + pre_training + (1 | subj),  
+  data=dtmathavgwide,                                    
+  family = binomial(link = "logit"),                      
+  prior = priors,
+  iter = 8000,                                            
+  chains = 4, 
+  control = list(adapt_delta = 0.99),
+  cores = 4,
+  save_pars = save_pars(all = TRUE)
+)
+
+```
+
+# Results
+
+```{r}
+summary_results3<-summary(model3)
+summary_results3
+```
+
+```{r}
+plot(model3)
+```
+
+```{r}
+pp_check(model3)
+```
+
+```{r}
+pp_check(model3, type = "dens_overlay_grouped", group = "condition")
+```
+
+```{r}
+#| label: fig-rank-hist-fit3
+#| fig-cap: Rank histogram of the posterior distributions of model parameters.
+as_draws(model3) |>
+  mcmc_rank_hist(pars = c("b_conditionperformance", "b_conditionneutral", "b_pre_training", "b_Intercept"))
+```
+
+@tbl-summ-fit3 shows the posterior distributions of "b_conditionperformance", "b_conditionneutral", "b_pre_training", "b_Intercept".
+
+```{r}
+#| label: tbl-summ-fit3
+#| tbl-cap: Posterior summary of the model parameters.
+
+summ_fit3 <- as_draws_df(model3) |>
+  subset_draws(variable = c("b_conditionperformance", "b_conditionneutral", "b_pre_training", "b_Intercept")) |>
+  summarise_draws()
+
+
+knitr::kable(summ_fit3, digits = 2)
+
+```
+
+
+```{r}
+conditional_effects(model3)
+```
+
+
+
+
+
+
+
+
+
+
+
+
